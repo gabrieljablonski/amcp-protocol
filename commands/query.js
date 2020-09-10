@@ -1,10 +1,10 @@
-const BaseCommand = require("./baseCommand");
+const BaseCommand = require("./_base");
 const { setValues, swapWordPositions } = require("../services/utils");
 
 class CINF extends BaseCommand {
   constructor(options = {}) {
     super(setValues(options, {
-      path: BaseCommand.REQUIRED,
+      filePath: BaseCommand.REQUIRED,
     }));
   }
 }
@@ -38,7 +38,7 @@ class VERSION extends BaseCommand {
 class INFO extends BaseCommand {
   constructor(options = {}) {
     if (options.layer && !options.channel)
-      throw new Error("channel is required");
+      options.channel = BaseCommand.REQUIRED;
     super(setValues(options, {
       channel: BaseCommand.OPTIONAL,
       layer: BaseCommand.OPTIONAL,

@@ -1,12 +1,11 @@
 const BaseCommand = require("./_base");
 const { setValues, swapWordPositions } = require("../services/utils");
-const { Tween } = require("./argTypes");
 
 class MixerBaseCommand extends BaseCommand {
   constructor(options = {}) {
     super(setValues(options, {
       channel: BaseCommand.REQUIRED,
-      layer: 0,
+      layer: BaseCommand.OPTIONAL,
     }));
   }
 
@@ -18,7 +17,7 @@ class MixerBaseCommand extends BaseCommand {
 class KEYER extends MixerBaseCommand {
   constructor(options = {}) {
     super(setValues(options, {
-      keyer: false,
+      keyer: BaseCommand.OPTIONAL,
     }));
   }
 }
@@ -231,13 +230,7 @@ class GRID extends MixerBaseCommand {
   }
 }
 
-class COMMIT extends MixerBaseCommand {
-  constructor(options = {}) {
-    super(setValues(options, {
-      layer: BaseCommand.OPTIONAL,
-    }));
-  }
-}
+class COMMIT extends MixerBaseCommand {}
 
 class CLEAR extends MixerBaseCommand {}
 
@@ -245,3 +238,29 @@ class CHANNEL_GRID extends BaseCommand {
   // although it appears under 'MIXER' in the protocol definition,
   // the command does not share the prefix
 }
+
+module.exports = {
+  KEYER,
+  CHROMA,
+  BLEND,
+  INVERT,
+  OPACITY,
+  BRIGHTNESS,
+  SATURATION,
+  CONTRAST,
+  LEVELS,
+  FILL,
+  CLIP,
+  ANCHOR,
+  CROP,
+  ROTATION,
+  PERSPECTIVE,
+  MIPMAP,
+  VOLUME,
+  MASTERVOLUME,
+  STRAIGHT_ALPHA_OUTPUT,
+  GRID,
+  COMMIT,
+  CLEAR,
+  CHANNEL_GRID,
+};

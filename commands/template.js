@@ -1,4 +1,4 @@
-const BaseCommand = require("./baseCommand");
+const BaseCommand = require("./_base");
 const { setValues, swapWordPositions } = require("../services/utils");
 
 class TemplateBaseCommand extends BaseCommand {
@@ -25,15 +25,7 @@ class ADD extends TemplateBaseCommand {
   }
 }
 
-class PLAY extends TemplateBaseCommand {
-  constructor(options = {}) {
-    super(setValues(options, {
-      template: BaseCommand.REQUIRED,
-      playOnLoad: BaseCommand.REQUIRED,
-      data: BaseCommand.OPTIONAL,
-    }));
-  }
-}
+class PLAY extends TemplateBaseCommand {}
 
 class STOP extends TemplateBaseCommand {}
 

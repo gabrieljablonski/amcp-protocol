@@ -6,8 +6,8 @@ const setValues = (obj, values) => {
   // });
 
   return {
-    ...newObj,
     ...values,
+    ...obj,
   };
 };
 
