@@ -1,0 +1,28 @@
+{
+  "name": "amcp-protocol",
+  "version": "0.1.0",
+  "description": "An API for the AMCP protocol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrieljablonski/amcp-protocol.git"
+  },
+  "keywords": [
+    "media",
+    "amcp",
+    "casparcg"
+  ],
+  "author": "Gabriel Jablonski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gabrieljablonski/amcp-protocol/issues"
+  },
+  "homepage": "https://github.com/gabrieljablonski/amcp-protocol#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "hotload": "0.0.5"
+  }
+}
