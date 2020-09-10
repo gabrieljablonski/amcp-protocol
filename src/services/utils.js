@@ -1,10 +1,10 @@
-const setValues = (obj, values) => {
-  // let newObj = {};
-  // Object.entries(defaultValues).forEach(([prop, defaultValue]) => {
-  //   newObj[prop] = obj[prop] !== undefined ? obj[prop] : defaultValue;
-  //   delete obj[prop];
-  // });
+const sanitize = str => 
+  str.trim()
+     .replace(/"/g, '\\"')
+     .replace(/\\/g, "\\\\")
+     .replace(/\n/g, "\\n");
 
+const setValues = (obj, values) => {
   return {
     ...values,
     ...obj,
@@ -19,6 +19,7 @@ const swapWordPositions = (str, first, second) => {
 }
 
 module.exports = {
+  sanitize,
   setValues,
   swapWordPositions,
 };
