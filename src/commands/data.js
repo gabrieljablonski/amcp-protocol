@@ -1,4 +1,4 @@
-const BaseCommand = require("./_base");
+const BaseCommand = require("./base");
 const { setValues } = require("../services/utils");
 
 class DataBaseCommand extends BaseCommand {

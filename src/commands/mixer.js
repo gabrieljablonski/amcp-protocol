@@ -1,4 +1,4 @@
-const BaseCommand = require("./_base");
+const BaseCommand = require("./base");
 const { setValues, swapWordPositions } = require("../services/utils");
 
 class MixerBaseCommand extends BaseCommand {

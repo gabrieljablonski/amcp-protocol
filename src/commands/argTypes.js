@@ -120,6 +120,7 @@ class Action {
 module.exports = {
   TransitionType,
   Direction,
+  Blend,
   Tween,
   LogLevel,
   LogCategory,

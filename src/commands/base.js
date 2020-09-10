@@ -1,4 +1,4 @@
-class BaseCommand {
+class Command {
   static REQUIRED = "__REQUIRED";
   static OPTIONAL = "__OPTIONAL";
   static HYPHENATED_PROPS = ['layer', 'firstLayer', 'secondLayer', 'consumerIndex']
@@ -15,10 +15,10 @@ class BaseCommand {
   _validateAttributes() {
     Object.getOwnPropertyNames(this).forEach(prop => {
       const val = this[prop];
-      if (val == BaseCommand.REQUIRED)
+      if (val == Command.REQUIRED)
         throw new Error(`property '${prop}' is required`)
 
-      if (val != BaseCommand.OPTIONAL && BaseCommand.HYPHENATED_PROPS.indexOf(prop) != -1)
+      if (val != Command.OPTIONAL && Command.HYPHENATED_PROPS.includes(prop))
         this[prop] = `-${val}`;
     });
   }
@@ -30,16 +30,16 @@ class BaseCommand {
     let out = command;
 
     Object.entries(this).forEach(([prop, val]) => {
-      if (val == BaseCommand.OPTIONAL)
+      if (val == Command.OPTIONAL)
         return;
 
-      if (BaseCommand.HYPHENATED_PROPS.indexOf(prop) != -1) {
+      if (Command.HYPHENATED_PROPS.includes(prop)) {
         out += val;
         return;
       }
 
       if (typeof val == "boolean") {
-        if (BaseCommand.NON_BINARY_BOOL_ATTRS.indexOf(prop) != -1)
+        if (Command.NON_BINARY_BOOL_ATTRS.includes(prop))
           val = out.toUpperCase();
         else
           val = val ? '1' : '0';
@@ -51,4 +51,4 @@ class BaseCommand {
   }
 }
 
-module.exports = BaseCommand;
+module.exports = Command;
