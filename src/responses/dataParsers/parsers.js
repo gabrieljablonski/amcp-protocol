@@ -2,7 +2,7 @@ class Parsers {
   static _registered = [];
 
   static register(parser) {
-    if (typeof parser === "list") {
+    if (Array.isArray(parser)) {
       parser.forEach(p => {
         Parsers._registered.push(p);
       });
@@ -17,7 +17,13 @@ class Parsers {
 }
 
 const { MediaFile } = require("./fileInfo");
+const { Channel } = require("./channel");
+const { Data } = require("./data");
 
-Parsers.register(MediaFile);
+Parsers.register([
+  MediaFile,
+  Channel,
+  Data,
+]);
 
 module.exports = Parsers;

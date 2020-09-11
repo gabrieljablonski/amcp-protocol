@@ -1,6 +1,6 @@
 {
-  "name": "amcp-protocol",
-  "version": "0.1.0",
+  "name": "@gabrieljablonski/amcp-protocol",
+  "version": "0.1.1",
   "description": "An API for the AMCP protocol",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,9 @@
     "url": "https://github.com/gabrieljablonski/amcp-protocol/issues"
   },
   "homepage": "https://github.com/gabrieljablonski/amcp-protocol#readme",
-  "dependencies": {},
+  "dependencies": {
+    "fast-xml-parser": "^3.17.4"
+  },
   "devDependencies": {
     "hotload": "0.0.5"
   }

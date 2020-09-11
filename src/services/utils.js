@@ -1,7 +1,6 @@
 const sanitize = str => 
   str.trim()
      .replace(/"/g, '\\"')
-     .replace(/\\/g, "\\\\")
      .replace(/\n/g, "\\n");
 
 const setValues = (obj, values) => {

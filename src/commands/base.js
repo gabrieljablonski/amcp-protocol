@@ -1,3 +1,5 @@
+const { sanitize } = require("../services/utils");
+
 class Command {
   static REQUIRED = "__REQUIRED";
   static OPTIONAL = "__OPTIONAL";
@@ -30,6 +32,9 @@ class Command {
     let out = command;
 
     Object.entries(this).forEach(([prop, val]) => {
+      if (typeof val === "object")
+        val = JSON.stringify(val);
+
       if (val == Command.OPTIONAL)
         return;
 
@@ -40,10 +45,12 @@ class Command {
 
       if (typeof val == "boolean") {
         if (Command.NON_BINARY_BOOL_ATTRS.includes(prop))
-          val = out.toUpperCase();
+          val = prop.toUpperCase();
         else
           val = val ? '1' : '0';
       }
+      if (val.includes('"') || val.includes("\n") || val.includes(" "))
+        val = `"${sanitize(val)}"`;
       out += ` ${val}`;
     });
 

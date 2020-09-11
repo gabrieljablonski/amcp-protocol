@@ -55,7 +55,7 @@ class Response {
     const split = command.split(" ");
     status = split.pop();
     if ([Response.OK, Response.ERROR, Response.FAILED].includes(status)) {
-      command = split.join(" ");
+      command = split.join(" ") || null;
       return new Response({code, command, status, data});
     }
 
