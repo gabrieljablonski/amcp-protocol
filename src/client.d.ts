@@ -1,5 +1,3 @@
-import data from "./commands/data";
-
 type Transition = "CUT" | "MIX" | "PUSH" | "WIPE" | "SLIDE";
 type Direction = "LEFT" | "RIGHT" | "UP" | "DOWN";
 type Blend = "Normal" | "Lighten" | "Darken" | "Multiply" | "Average" | "Add" | "Subtract" | "Difference" | "Negation" | "Exclusion" | "Screen" | "Overlay" | "Soft_Light" | "Hard_Light" | "Color_Dodge " | "Color_Burn" | "Linear_Dodge" | "Linear_Burn" | "Linear_Light" | "Vivid_Light" | "Pin_Light " | "Hard_Mix" | "Reflect" | "Glow" | "Phoenix" | "Contrast" | "Saturation" | "Color" | "Luminosity";
@@ -30,7 +28,7 @@ type OptionsWithChannelLayer = {
 
 type OptionsLoadPlay = OptionsWithChannelLayer & {
   clip: string;
-  loop?: bool;
+  loop?: boolean;
   transition?: Transition;
   duration?: number;
   tween?: Tween;
@@ -38,7 +36,7 @@ type OptionsLoadPlay = OptionsWithChannelLayer & {
   seek?: number;
   length?: number;
   filterType?: FFmpegFilter;
-  auto?: bool;
+  auto?: boolean;
 };
 
 type OptionsCall = OptionsWithChannelLayer & {
@@ -295,13 +293,17 @@ type OptionsTemplateInfo = OptionsWithChannelLayer & {
   cgLayer?: number;
 };
 
-type OptionsThumbnailList = OptionsTemplateBase;
+type OptionsThumbnailList = {
+  subdirectory?: string;
+};
 
-type OptionsThumbnailRetrieve = OptionsTemplateBase;
+type OptionsThumbnailRetrieve = {
+  path: string;
+};
 
-type OptionsThumbnailGenerate = OptionsTemplateBase;
-
-type OptionsThumbnailGenerateAll = OptionsTemplateBase;
+type OptionsThumbnailGenerate = {
+  path: string;
+};
 
 export class AMCPClient {
   constructor(options: AMCPClientOptions);
@@ -386,5 +388,5 @@ export class AMCPClient {
   thumbnailList(options: OptionsThumbnailList): Promise<Response>;
   thumbnailRetrieve(options: OptionsThumbnailRetrieve): Promise<Response>;
   thumbnailGenerate(options: OptionsThumbnailGenerate): Promise<Response>;
-  thumbnailGenerateAll(options: OptionsThumbnailGenerateAll): Promise<Response>;
+  thumbnailGenerateAll(): Promise<Response>;
 }
