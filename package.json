@@ -2,7 +2,8 @@
   "name": "@gabrieljablonski/amcp-protocol",
   "version": "0.1.1",
   "description": "An API for the AMCP protocol",
-  "main": "index.js",
+  "main": "./src/client.js",
+  "typings": "./src/client.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,6 +26,7 @@
     "fast-xml-parser": "^3.17.4"
   },
   "devDependencies": {
-    "hotload": "0.0.5"
+    "hotload": "0.0.5",
+    "typescript": "^4.0.2"
   }
 }

@@ -1,6 +1,6 @@
 class Info {
-  static NO_DATA = 100
-  static WITH_DATA = 101
+  static NO_DATA = 100;
+  static WITH_DATA = 101;
 }
 
 class Successful {

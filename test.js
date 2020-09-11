@@ -1,10 +1,11 @@
 const repl = require("repl");
 repl.start('> ');
 
-// const AMCPClient = require("./src/client");
-// const { INFO } = require("./src/commands/query");
+const { AMCPClient } = require("./src/client");
 
-// let amcp = new AMCPClient({host: "192.168.1.141"});
+let amcp = new AMCPClient();
+amcp.templateClear({});
+
 // amcp.connect();
 
 // let info = new INFO({channel: 1});

@@ -1,4 +1,4 @@
-class TransitionType {
+class Transition {
   static CUT = "CUT";
   static MIX = "MIX";
   static PUSH = "PUSH";
@@ -118,7 +118,7 @@ class Action {
 }
 
 module.exports = {
-  TransitionType,
+  Transition,
   Direction,
   Blend,
   Tween,
