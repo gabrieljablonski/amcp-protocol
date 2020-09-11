@@ -235,7 +235,7 @@ class COMMIT extends MixerBaseCommand {}
 class CLEAR extends MixerBaseCommand {}
 
 class CHANNEL_GRID extends BaseCommand {
-  // although it appears under 'MIXER' in the protocol definition,
+  // although it appears under "MIXER" in the protocol definition,
   // the command does not share the prefix
 }
 

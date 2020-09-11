@@ -3,6 +3,26 @@ const xmlParser = require("fast-xml-parser");
 const Parser = require("./base");
 const { INFO } = require("../../commands/query");
 
+class ChannelStatus {
+  constructor(channel) {
+    this._number = channel.number;
+    this._format = channel.format;
+    this._status = channel.status;
+  }
+
+  get number() {
+    return this._number;
+  }
+
+  get format() {
+    return this._format;
+  }
+
+  get status() {
+    return this._status;
+  }
+}
+
 class Channel extends Parser {
   static COMMANDS = [
     INFO,
@@ -30,7 +50,20 @@ class Channel extends Parser {
 
   static parse(data) {
     const parsed = xmlParser.parse(data);
-    return new Channel(parsed.channel);
+
+    if (parsed && parsed.channel) {
+      return new Channel(parsed.channel);
+    }
+
+    // <CHANNEL> <FORMAT> <STATUS>\n
+    return data.split("\n").map(c => {
+      const split = c.split(" ");
+      return new ChannelStatus({
+        number: split[0],
+        format: split[1],
+        status: split[2],
+      });
+    });
   }
 }
 

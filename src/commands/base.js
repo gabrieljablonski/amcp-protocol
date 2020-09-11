@@ -3,9 +3,9 @@ const { sanitize } = require("../services/utils");
 class Command {
   static REQUIRED = "__REQUIRED";
   static OPTIONAL = "__OPTIONAL";
-  static HYPHENATED_PROPS = ['layer', 'firstLayer', 'secondLayer', 'consumerIndex']
+  static HYPHENATED_PROPS = ["layer", "firstLayer", "secondLayer", "consumerIndex"]
     // these appear as the attr name in the output, instead of 0/1
-  static NON_BINARY_BOOL_ATTRS = ['loop', 'auto', 'transforms']
+  static NON_BINARY_BOOL_ATTRS = ["loop", "auto", "transforms"]
 
   constructor(options = {}) {
     Object.entries(options).forEach(([prop, val]) => {
@@ -18,7 +18,7 @@ class Command {
     Object.getOwnPropertyNames(this).forEach(prop => {
       const val = this[prop];
       if (val == Command.REQUIRED)
-        throw new Error(`property '${prop}' is required`)
+        throw new Error(`property "${prop}" is required`)
 
       if (val != Command.OPTIONAL && Command.HYPHENATED_PROPS.includes(prop))
         this[prop] = `-${val}`;
@@ -35,6 +35,9 @@ class Command {
       if (typeof val === "object")
         val = JSON.stringify(val);
 
+      if (typeof val === "number") 
+        val = val.toString();
+
       if (val == Command.OPTIONAL)
         return;
 
@@ -47,7 +50,7 @@ class Command {
         if (Command.NON_BINARY_BOOL_ATTRS.includes(prop))
           val = prop.toUpperCase();
         else
-          val = val ? '1' : '0';
+          val = val ? "1" : "0";
       }
       if (val.includes('"') || val.includes("\n") || val.includes(" "))
         val = `"${sanitize(val)}"`;

@@ -12,9 +12,12 @@ class Response {
     this._command = response.command;
     this._status = response.status;
     this._rawData = response.data;
-
-    let parser = Parsers.find(response.command);
-    this._parsedData = parser ? parser.parse(response.data) : response.data;
+    this._parsedData = response.data;
+    
+    if (response.data) {
+      let parser = Parsers.find(response.command);
+      this._parsedData = parser ? parser.parse(response.data) : response.data;
+    }
   }
 
   get code() {

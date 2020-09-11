@@ -8,7 +8,7 @@ class AMCPClient {
   static DEFAULT_HOST = "127.0.0.1";
   static DEFAULT_PORT = 5250;
   
-  constructor(options) {
+  constructor(options = {}) {
     this._host = options.host || AMCPClient.DEFAULT_HOST;
     this._port = options.port || AMCPClient.DEFAULT_PORT;
 
@@ -58,7 +58,7 @@ class AMCPClient {
     if (!this._connected)
       throw new Error("socket is not connected");
     const data = command.build() + "\r\n";
-    console.log(`Sending command: '${data}'`);
+    console.log(`Sending command: "${data}"`);
     this._socket.write(data, () => {
       this._waitingResponse = true;
     });
@@ -375,4 +375,6 @@ class AMCPClient {
   }
 }
 
-module.exports = AMCPClient;
+module.exports = { 
+  AMCPClient
+};
