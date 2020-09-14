@@ -1,12 +1,13 @@
-const net = require("net");
+require("log-timestamp");
+const io = require("socket.io-client");
 
 const ResponseResolver = require("./responses/resolver");
 const Commands = require("./commands");
 
 class AMCPClient {
   // TODO: handle async events
-  static DEFAULT_HOST = "127.0.0.1";
-  static DEFAULT_PORT = 5250;
+  static DEFAULT_HOST = "localhost";
+  static DEFAULT_PORT = 52500;
   
   constructor(options = {}) {
     this._host = options.host || AMCPClient.DEFAULT_HOST;
@@ -15,53 +16,42 @@ class AMCPClient {
     this._connected = false;
     this._responseResolver = new ResponseResolver();
 
-    this._socket = new net.Socket();
     this._setupSocket();
   }
 
   _setupSocket() {
-    this._socket.setEncoding("utf-8");
+    this._socket = io(`http://${this._host}:${this._port}`);
+
     this._socket.on("connect", () => {
       this._responseResolver = new ResponseResolver();
       this._connected = true;
-      console.log(`Connection established to ${this._socket.remoteAddress}:${this._socket.remotePort}.`)
+      console.log(`Connection established to http://${this._host}:${this._port}.`)
     });
 
-    this._socket.on("close", () => {
+    this._socket.on("disconnect", () => {
       this._connected = false;
       console.log("Connection lost.");
     });
 
-    this._socket.on("data", data => {
+    this._socket.on("amcp_response", data => {
       if (this._responseResolver.expecting)
         return this._responseResolver.resolve(data);
       console.log("received: " + data);
     });
   }
 
-  connect() {
-    if (this._connected)
-      throw new Error("socket is already connected");
-    this._socket.connect({
-      host: this._host,
-      port: this._port,
-    });
-  }
-
   disconnect() {
     if (!this._connected)
       throw new Error("socket is not connected");
-    this._socket.end();
+    this._socket.disconnect();
   }
 
   sendCommand(command) {
     if (!this._connected)
       throw new Error("socket is not connected");
     const data = command.build() + "\r\n";
-    console.log(`Sending command: "${data}"`);
-    this._socket.write(data, () => {
-      this._waitingResponse = true;
-    });
+    console.log(`Sending command: ${JSON.stringify(data)}`);
+    this._socket.emit("amcp", data);
 
     return this._responseResolver.async(data);
   }

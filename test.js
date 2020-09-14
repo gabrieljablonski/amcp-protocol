@@ -1,10 +1,10 @@
 const repl = require("repl");
 repl.start('> ');
 
-const { AMCPClient } = require("./src/client");
+// const { AMCPClient } = require("./src/client");
 
-let amcp = new AMCPClient();
-amcp.templateClear({});
+// let amcp = new AMCPClient();
+// amcp.connect();
 
 // amcp.connect();
 
