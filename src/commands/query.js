@@ -2,6 +2,8 @@ const BaseCommand = require("./base");
 const { setValues, swapWordPositions } = require("../services/utils");
 
 class CINF extends BaseCommand {
+  static NAME = "CINF";
+  
   constructor(options = {}) {
     super(setValues(options, {
       filePath: BaseCommand.REQUIRED,
@@ -10,6 +12,8 @@ class CINF extends BaseCommand {
 }
 
 class CLS extends BaseCommand {
+  static NAME = "CLS";
+  
   constructor(options = {}) {
     super(setValues(options, {
       subdirectory: BaseCommand.OPTIONAL,
@@ -17,9 +21,13 @@ class CLS extends BaseCommand {
   }
 }
 
-class FLS extends BaseCommand {}
+class FLS extends BaseCommand {
+  static NAME = "FLS";
+}
 
 class TLS extends BaseCommand {
+  static NAME = "TLS";
+  
   constructor(options = {}) {
     super(setValues(options, {
       subdirectory: BaseCommand.OPTIONAL,
@@ -28,6 +36,8 @@ class TLS extends BaseCommand {
 }
 
 class VERSION extends BaseCommand {
+  static NAME = "VERSION";
+  
   constructor(options = {}) {
     super(setValues(options, {
       component: BaseCommand.OPTIONAL,
@@ -36,6 +46,8 @@ class VERSION extends BaseCommand {
 }
 
 class INFO extends BaseCommand {
+  static NAME = "INFO";
+  
   constructor(options = {}) {
     if (options.layer && !options.channel)
       options.channel = BaseCommand.REQUIRED;
@@ -47,6 +59,8 @@ class INFO extends BaseCommand {
 }
 
 class INFO__TEMPLATE extends BaseCommand {
+  static NAME = "INFO__TEMPLATE";
+  
   constructor(options = {}) {
     super(setValues(options, {
       template: BaseCommand.REQUIRED,
@@ -54,19 +68,33 @@ class INFO__TEMPLATE extends BaseCommand {
   }
 }
 
-class INFO__CONFIG extends BaseCommand {}
+class INFO__CONFIG extends BaseCommand {
+  static NAME = "INFO__CONFIG";
+}
 
-class INFO__PATHS extends BaseCommand {}
+class INFO__PATHS extends BaseCommand {
+  static NAME = "INFO__PATHS";
+}
 
-class INFO__SYSTEM extends BaseCommand {}
+class INFO__SYSTEM extends BaseCommand {
+  static NAME = "INFO__SYSTEM";
+}
 
-class INFO__SERVER extends BaseCommand {}
+class INFO__SERVER extends BaseCommand {
+  static NAME = "INFO__SERVER";
+}
 
-class INFO__QUEUES extends BaseCommand {}
+class INFO__QUEUES extends BaseCommand {
+  static NAME = "INFO__QUEUES";
+}
 
-class INFO__THREADS extends BaseCommand {}
+class INFO__THREADS extends BaseCommand {
+  static NAME = "INFO__THREADS";
+}
 
 class INFO__DELAY extends BaseCommand {
+  static NAME = "INFO__DELAY";
+  
   constructor(options = {}) {
     super(setValues(options, {
       channel: BaseCommand.REQUIRED,
@@ -79,19 +107,33 @@ class INFO__DELAY extends BaseCommand {
   }
 }
 
-class DIAG extends BaseCommand {}
+class DIAG extends BaseCommand {
+  static NAME = "DIAG";
+}
 
-class GL__INFO extends BaseCommand {}
+class GL__INFO extends BaseCommand {
+  static NAME = "GL__INFO";
+}
 
-class GL__GC extends BaseCommand {}
+class GL__GC extends BaseCommand {
+  static NAME = "GL__GC";
+}
 
-class BYE extends BaseCommand {}
+class BYE extends BaseCommand {
+  static NAME = "BYE";
+}
 
-class KILL extends BaseCommand {}
+class KILL extends BaseCommand {
+  static NAME = "KILL";
+}
 
-class RESTART extends BaseCommand {}
+class RESTART extends BaseCommand {
+  static NAME = "RESTART";
+}
 
 class HELP extends BaseCommand {
+  static NAME = "HELP";
+  
   static PRODUCER = "PRODUCER";
   static CONSUMER = "CONSUMER";
 

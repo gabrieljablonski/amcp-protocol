@@ -16,6 +16,8 @@ class TemplateBaseCommand extends BaseCommand {
 }
 
 class ADD extends TemplateBaseCommand {
+  static NAME = "ADD";
+
   constructor(options = {}) {
     super(setValues(options, {
       template: BaseCommand.REQUIRED,
@@ -25,15 +27,25 @@ class ADD extends TemplateBaseCommand {
   }
 }
 
-class PLAY extends TemplateBaseCommand {}
+class PLAY extends TemplateBaseCommand {
+  static NAME = "PLAY";
+}
 
-class STOP extends TemplateBaseCommand {}
+class STOP extends TemplateBaseCommand {
+  static NAME = "STOP";
+}
 
-class NEXT extends TemplateBaseCommand {}
+class NEXT extends TemplateBaseCommand {
+  static NAME = "NEXT";
+}
 
-class REMOVE extends TemplateBaseCommand {}
+class REMOVE extends TemplateBaseCommand {
+  static NAME = "REMOVE";
+}
 
 class CLEAR extends TemplateBaseCommand {
+  static NAME = "CLEAR";
+
   constructor(options = {}) {
     super(setValues(options, {
       // ignored if set
@@ -43,6 +55,8 @@ class CLEAR extends TemplateBaseCommand {
 }
 
 class UPDATE extends TemplateBaseCommand {
+  static NAME = "UPDATE";
+
   constructor(options = {}) {
     super(setValues(options, {
       data: BaseCommand.REQUIRED,
@@ -51,6 +65,8 @@ class UPDATE extends TemplateBaseCommand {
 }
 
 class INVOKE extends TemplateBaseCommand {
+  static NAME = "INVOKE";
+
   constructor(options = {}) {
     super(setValues(options, {
       method: BaseCommand.REQUIRED,
@@ -59,6 +75,8 @@ class INVOKE extends TemplateBaseCommand {
 }
 
 class INFO extends TemplateBaseCommand {
+  static NAME = "INFO";
+
   constructor(options = {}) {
     super(setValues(options, {
       cgLayer: BaseCommand.OPTIONAL,

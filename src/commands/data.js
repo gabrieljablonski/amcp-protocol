@@ -8,6 +8,8 @@ class DataBaseCommand extends BaseCommand {
 }
 
 class STORE extends DataBaseCommand {
+  static NAME = "STORE";
+  
   constructor(options = {}) {
     super(setValues(options, {
       path: BaseCommand.REQUIRED,
@@ -17,6 +19,8 @@ class STORE extends DataBaseCommand {
 }
 
 class RETRIEVE extends DataBaseCommand {
+  static NAME = "RETRIEVE";
+  
   constructor(options = {}) {
     super(setValues(options, {
       path: BaseCommand.REQUIRED,
@@ -25,6 +29,8 @@ class RETRIEVE extends DataBaseCommand {
 }
 
 class LIST extends DataBaseCommand {
+  static NAME = "LIST";
+  
   constructor(options = {}) {
     super(setValues(options, {
       subdirectory: BaseCommand.OPTIONAL,
@@ -33,6 +39,8 @@ class LIST extends DataBaseCommand {
 }
 
 class REMOVE extends DataBaseCommand {
+  static NAME = "REMOVE";
+  
   constructor(options = {}) {
     super(setValues(options, {
       path: BaseCommand.REQUIRED,

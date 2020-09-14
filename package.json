@@ -1,6 +1,6 @@
 {
   "name": "@gabrieljablonski/amcp-protocol",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "An API for the AMCP protocol",
   "main": "./lib/amcp-protocol.min.js",
   "typings": "./src/client.d.ts",

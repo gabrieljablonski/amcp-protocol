@@ -1,6 +1,7 @@
 const { sanitize } = require("../services/utils");
 
 class Command {
+  static NAME = "";
   static REQUIRED = "__REQUIRED";
   static OPTIONAL = "__OPTIONAL";
   static HYPHENATED_PROPS = ["layer", "firstLayer", "secondLayer", "consumerIndex"]
@@ -27,7 +28,7 @@ class Command {
 
   build() {
     // "__" represents a space in the command name
-    const command = this.constructor.name.replace(/__/g, " ");
+    const command = this.constructor.NAME.replace(/__/g, " ");
 
     let out = command;
 

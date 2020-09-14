@@ -27,21 +27,37 @@ class BaseLoadPlay extends BaseWithChannelLayer {
   }
 }
 
-class LOADBG extends BaseLoadPlay {}
+class LOADBG extends BaseLoadPlay {
+  static NAME = "LOADBG";
+}
 
-class LOAD extends BaseLoadPlay {}
+class LOAD extends BaseLoadPlay {
+  static NAME = "LOAD";
+}
 
-class PLAY extends BaseLoadPlay {}
+class PLAY extends BaseLoadPlay {
+  static NAME = "PLAY";
+}
 
-class PAUSE extends BaseWithChannelLayer {}
+class PAUSE extends BaseWithChannelLayer {
+  static NAME = "PAUSE";
+}
 
-class RESUME extends BaseWithChannelLayer {}
+class RESUME extends BaseWithChannelLayer {
+  static NAME = "RESUME";
+}
 
-class STOP extends BaseWithChannelLayer {}
+class STOP extends BaseWithChannelLayer {
+  static NAME = "STOP";
+}
 
-class CLEAR extends BaseWithChannelLayer {}
+class CLEAR extends BaseWithChannelLayer {
+  static NAME = "CLEAR";
+}
 
 class CALL extends BaseWithChannelLayer {
+  static NAME = "CALL";
+  
   constructor(options = {}) {
     super(setValues(options, {
       parameters: BaseCommand.OPTIONAL,
@@ -50,6 +66,8 @@ class CALL extends BaseWithChannelLayer {
 }
 
 class SWAP extends BaseCommand {
+  static NAME = "SWAP";
+  
   constructor(options = {}) {
     super(setValues(options, {
       firstChannel: BaseCommand.REQUIRED,
@@ -62,6 +80,8 @@ class SWAP extends BaseCommand {
 }
 
 class ADD extends BaseWithChannelLayer {
+  static NAME = "ADD";
+  
   constructor(options = {}) {
     super(setValues(options, {
       consumerIndex: BaseCommand.OPTIONAL,
@@ -72,6 +92,8 @@ class ADD extends BaseWithChannelLayer {
 }
 
 class REMOVE extends BaseWithChannelLayer {
+  static NAME = "REMOVE";
+  
   constructor(options = {}) {
     super(setValues(options, {
       consumerIndex: BaseCommand.OPTIONAL,
@@ -80,9 +102,13 @@ class REMOVE extends BaseWithChannelLayer {
   }
 }
 
-class PRINT extends BaseWithChannelLayer {}
+class PRINT extends BaseWithChannelLayer {
+  static NAME = "PRINT";
+}
 
 class LOG__LEVEL extends BaseCommand {
+  static NAME = "LOG__LEVEL";
+  
   constructor(options = {}) {
     super(setValues(options, {
       level: BaseCommand.REQUIRED,
@@ -91,6 +117,8 @@ class LOG__LEVEL extends BaseCommand {
 }
 
 class LOG__CATEGORY extends BaseCommand {
+  static NAME = "LOG__CATEGORY";
+  
   constructor(options = {}) {
     super(setValues(options, {
       category: BaseCommand.REQUIRED,
@@ -100,6 +128,8 @@ class LOG__CATEGORY extends BaseCommand {
 }
 
 class SET extends BaseCommand {
+  static NAME = "SET";
+  
   constructor(options = {}) {
     super(setValues(options, {
       channel: BaseCommand.REQUIRED,
@@ -110,6 +140,8 @@ class SET extends BaseCommand {
 }
 
 class LOCK extends BaseCommand {
+  static NAME = "LOCK";
+  
   constructor(options = {}) {
     super(setValues(options, {
       channel: BaseCommand.REQUIRED,
