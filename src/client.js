@@ -3,40 +3,49 @@ const io = require("socket.io-client");
 
 const ResponseResolver = require("./responses/resolver");
 const Commands = require("./commands");
+const { resolve } = require("path");
 
 class AMCPClient {
   // TODO: handle async events
   static DEFAULT_HOST = "localhost";
   static DEFAULT_PORT = 52500;
+  static CONNECTION_TIMEOUT = 3000;
   
   constructor(options = {}) {
     this._host = options.host || AMCPClient.DEFAULT_HOST;
     this._port = options.port || AMCPClient.DEFAULT_PORT;
+    this._connectionTimeout = options.connectionTimeout || AMCPClient.CONNECTION_TIMEOUT;
 
     this._connected = false;
     this._responseResolver = new ResponseResolver();
-
-    this._setupSocket();
   }
 
-  _setupSocket() {
+  connect() {
     this._socket = io(`http://${this._host}:${this._port}`);
 
-    this._socket.on("connect", () => {
-      this._responseResolver = new ResponseResolver();
-      this._connected = true;
-      console.log(`Connection established to http://${this._host}:${this._port}.`)
-    });
+    return new Promise((resolve, reject) => {
+      let connectionTimeout = setTimeout(() => {
+        reject("connnection timed out");
+      }, this._connectionTimeout);
 
-    this._socket.on("disconnect", () => {
-      this._connected = false;
-      console.log("Connection lost.");
-    });
+      this._socket.on("connect", () => {
+        this._responseResolver = new ResponseResolver();
+        this._connected = true;
+        clearTimeout(connectionTimeout);
+        resolve();
+        console.log(`Connection established to http://${this._host}:${this._port}.`)
+      });
 
-    this._socket.on("amcp_response", data => {
-      if (this._responseResolver.expecting)
-        return this._responseResolver.resolve(data);
-      console.log("received: " + data);
+      this._socket.on("disconnect", () => {
+        this._connected = false;
+        console.log("Connection lost.");
+      });
+  
+      this._socket.on("amcp_response", data => {
+        if (this._responseResolver.expecting)
+          return this._responseResolver.resolve(data);
+        console.log("received: " + data);
+      });
     });
   }
 

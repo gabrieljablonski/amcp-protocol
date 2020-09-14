@@ -17,8 +17,9 @@ export class Response {
 }
 
 type AMCPClientOptions = {
-  host?: string | "127.0.0.1";
-  port?: number | 5250;
+  host?: string | "localhost";
+  port?: number | 52500;
+  connectionTimeout?: number | 3000;
 };
 
 type OptionsWithChannelLayer = {
@@ -308,7 +309,7 @@ type OptionsThumbnailGenerate = {
 export class AMCPClient {
   constructor(options: AMCPClientOptions);
 
-  connect(): void;
+  connect(): Promise;
   disconnect(): void;
   sendCommand(command: Command): Promise<Response>;
 
