@@ -26,7 +26,7 @@ class Data extends Parser {
     try {
       return JSON.parse(data);
     } catch(err) {
-      console.log("failed to parse ", err);
+      console.warn("file is not a valid json");
       return data;
     }
   }

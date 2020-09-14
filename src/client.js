@@ -1,7 +1,9 @@
 require("log-timestamp");
 const io = require("socket.io-client");
 
+const Response = require("./responses/response");
 const ResponseResolver = require("./responses/resolver");
+const CasparConfig = require("./services/casparConfig");
 const Commands = require("./commands");
 const { resolve } = require("path");
 
@@ -58,11 +60,19 @@ class AMCPClient {
   sendCommand(command) {
     if (!this._connected)
       throw new Error("socket is not connected");
+    console.log(command);
     const data = command.build() + "\r\n";
     console.log(`Sending command: ${JSON.stringify(data)}`);
     this._socket.emit("amcp", data);
 
     return this._responseResolver.async(data);
+  }
+
+  saveConfig(config) {
+    return this.dataStore({
+      path: "../casparcg.config",
+      data: config.xml,
+    });
   }
 
   loadBG(options) {
@@ -375,5 +385,6 @@ class AMCPClient {
 }
 
 module.exports = { 
-  AMCPClient
+  CasparConfig,
+  AMCPClient,
 };

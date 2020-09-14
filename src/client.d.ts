@@ -306,12 +306,26 @@ type OptionsThumbnailGenerate = {
   path: string;
 };
 
+type Paths = {
+  mediaPath: string;
+  logPath: string;
+  dataPath: string;
+  templatePath: string;
+};
+
+export class CasparConfig {
+  public paths: Paths;
+  public lockClearPhrase: string;
+  public channels: [Channel];
+};
+
 export class AMCPClient {
   constructor(options: AMCPClientOptions);
 
   connect(): Promise;
   disconnect(): void;
   sendCommand(command: Command): Promise<Response>;
+  saveConfig(config: CasparConfig): Promise<Response>;
 
   loadBG(options: OptionsLoadPlay): Promise<Response>;
   load(options: OptionsLoadPlay): Promise<Response>;

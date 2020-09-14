@@ -1,5 +1,4 @@
 const { Info } = require("./returnCodes");
-const FileInfo = require("./dataParsers/fileInfo");
 const Parsers = require("./dataParsers/parsers")
 
 class Response {

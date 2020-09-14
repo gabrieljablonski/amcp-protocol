@@ -19,11 +19,13 @@ class Parsers {
 const { MediaFile } = require("./fileInfo");
 const { Channel } = require("./channel");
 const { Data } = require("./data");
+const { Config } = require("./config");
 
 Parsers.register([
   MediaFile,
   Channel,
   Data,
+  Config,
 ]);
 
 module.exports = Parsers;
