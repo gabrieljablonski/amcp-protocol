@@ -60,7 +60,6 @@ class AMCPClient {
   sendCommand(command) {
     if (!this._connected)
       throw new Error("socket is not connected");
-    console.log(command);
     const data = command.build() + "\r\n";
     console.log(`Sending command: ${JSON.stringify(data)}`);
     this._socket.emit("amcp", data);
