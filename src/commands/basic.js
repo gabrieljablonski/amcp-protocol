@@ -106,8 +106,8 @@ class PRINT extends BaseWithChannelLayer {
   static NAME = "PRINT";
 }
 
-class LOG__LEVEL extends BaseCommand {
-  static NAME = "LOG__LEVEL";
+class LOG_LEVEL extends BaseCommand {
+  static NAME = "LOG LEVEL";
   
   constructor(options = {}) {
     super(setValues(options, {
@@ -116,8 +116,8 @@ class LOG__LEVEL extends BaseCommand {
   }
 }
 
-class LOG__CATEGORY extends BaseCommand {
-  static NAME = "LOG__CATEGORY";
+class LOG_CATEGORY extends BaseCommand {
+  static NAME = "LOG CATEGORY";
   
   constructor(options = {}) {
     super(setValues(options, {
@@ -164,8 +164,8 @@ module.exports = {
   ADD, 
   REMOVE,
   PRINT, 
-  LOG__LEVEL,
-  LOG__CATEGORY, 
+  LOG_LEVEL,
+  LOG_CATEGORY, 
   SET, 
   LOCK,
 };

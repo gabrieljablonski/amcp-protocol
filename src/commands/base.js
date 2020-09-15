@@ -27,8 +27,7 @@ class Command {
   }
 
   build() {
-    // "__" represents a space in the command name
-    const command = this.constructor.NAME.replace(/__/g, " ");
+    const command = this.constructor.NAME;
 
     let out = command;
 

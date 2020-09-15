@@ -4,6 +4,7 @@ class Resolver {
   static DEFAULT_RESPONSE_TIMEOUT = 3000;
 
   constructor() {
+    // queueing assumes responses are guaranteed to be in order (FIFO)
     this._queued = [];
     this._responseTimeout = 0;
   }

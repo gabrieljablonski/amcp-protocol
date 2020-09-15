@@ -4,11 +4,10 @@ class Parser {
 
   static isCommandParser(command) {
     return this.COMMANDS.map(c => {
-      const name = c.NAME.replace(/__/g, " ");
       if (this.COMMAND_PREFIX)
-        return `${this.COMMAND_PREFIX} ${name}`;
+        return `${this.COMMAND_PREFIX} ${c.NAME}`;
         
-      return name;
+      return c.NAME;
     }
     ).includes(command);
   }

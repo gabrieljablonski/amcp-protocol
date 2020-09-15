@@ -1,13 +1,13 @@
 const xmlParser = require("fast-xml-parser");
 
 const Parser = require("./base");
-const { INFO__CONFIG } = require("../../commands/query");
+const { INFO_CONFIG } = require("../../commands/query");
 const CasparConfig = require("../../services/casparConfig");
 const { kebabToCamel } = require("../../services/utils");
 
 class Config extends Parser {
   static COMMANDS = [
-    INFO__CONFIG,
+    INFO_CONFIG,
   ];
 
   static parse(data) {

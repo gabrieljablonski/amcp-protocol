@@ -5,7 +5,6 @@ const Response = require("./responses/response");
 const ResponseResolver = require("./responses/resolver");
 const CasparConfig = require("./services/casparConfig");
 const Commands = require("./commands");
-const { resolve } = require("path");
 
 class AMCPClient {
   // TODO: handle async events
@@ -123,11 +122,11 @@ class AMCPClient {
   }
 
   logLevel(options) {
-    return this.sendCommand(new Commands.Basic.LOG__LEVEL(options));
+    return this.sendCommand(new Commands.Basic.LOG_LEVEL(options));
   }
 
   logCategory(options) {
-    return this.sendCommand(new Commands.Basic.LOG__CATEGORY(options));
+    return this.sendCommand(new Commands.Basic.LOG_CATEGORY(options));
   }
 
   set(options) {
@@ -271,35 +270,35 @@ class AMCPClient {
   }
 
   infoTemplate(options) {
-    return this.sendCommand(new Commands.Query.INFO__TEMPLATE(options));
+    return this.sendCommand(new Commands.Query.INFO_TEMPLATE(options));
   }
 
   infoConfig(options) {
-    return this.sendCommand(new Commands.Query.INFO__CONFIG(options));
+    return this.sendCommand(new Commands.Query.INFO_CONFIG(options));
   }
 
   infoPaths(options) {
-    return this.sendCommand(new Commands.Query.INFO__PATHS(options));
+    return this.sendCommand(new Commands.Query.INFO_PATHS(options));
   }
 
   infoSystem(options) {
-    return this.sendCommand(new Commands.Query.INFO__SYSTEM(options));
+    return this.sendCommand(new Commands.Query.INFO_SYSTEM(options));
   }
 
   infoServer(options) {
-    return this.sendCommand(new Commands.Query.INFO__SERVER(options));
+    return this.sendCommand(new Commands.Query.INFO_SERVER(options));
   }
 
   infoQueues(options) {
-    return this.sendCommand(new Commands.Query.INFO__QUEUES(options));
+    return this.sendCommand(new Commands.Query.INFO_QUEUES(options));
   }
 
   infoThreads(options) {
-    return this.sendCommand(new Commands.Query.INFO__THREADS(options));
+    return this.sendCommand(new Commands.Query.INFO_THREADS(options));
   }
 
   infoDelay(options) {
-    return this.sendCommand(new Commands.Query.INFO__DELAY(options));
+    return this.sendCommand(new Commands.Query.INFO_DELAY(options));
   }
 
   diag(options) {
@@ -307,11 +306,11 @@ class AMCPClient {
   }
 
   glInfo(options) {
-    return this.sendCommand(new Commands.Query.GL__INFO(options));
+    return this.sendCommand(new Commands.Query.GL_INFO(options));
   }
 
   glGC(options) {
-    return this.sendCommand(new Commands.Query.GL__GC(options));
+    return this.sendCommand(new Commands.Query.GL_GC(options));
   }
 
   bye(options) {

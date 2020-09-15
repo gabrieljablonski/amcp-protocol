@@ -58,8 +58,8 @@ class INFO extends BaseCommand {
   }
 }
 
-class INFO__TEMPLATE extends BaseCommand {
-  static NAME = "INFO__TEMPLATE";
+class INFO_TEMPLATE extends BaseCommand {
+  static NAME = "INFO TEMPLATE";
   
   constructor(options = {}) {
     super(setValues(options, {
@@ -68,32 +68,32 @@ class INFO__TEMPLATE extends BaseCommand {
   }
 }
 
-class INFO__CONFIG extends BaseCommand {
-  static NAME = "INFO__CONFIG";
+class INFO_CONFIG extends BaseCommand {
+  static NAME = "INFO CONFIG";
 }
 
-class INFO__PATHS extends BaseCommand {
-  static NAME = "INFO__PATHS";
+class INFO_PATHS extends BaseCommand {
+  static NAME = "INFO PATHS";
 }
 
-class INFO__SYSTEM extends BaseCommand {
-  static NAME = "INFO__SYSTEM";
+class INFO_SYSTEM extends BaseCommand {
+  static NAME = "INFO SYSTEM";
 }
 
-class INFO__SERVER extends BaseCommand {
-  static NAME = "INFO__SERVER";
+class INFO_SERVER extends BaseCommand {
+  static NAME = "INFO SERVER";
 }
 
-class INFO__QUEUES extends BaseCommand {
-  static NAME = "INFO__QUEUES";
+class INFO_QUEUES extends BaseCommand {
+  static NAME = "INFO QUEUES";
 }
 
-class INFO__THREADS extends BaseCommand {
-  static NAME = "INFO__THREADS";
+class INFO_THREADS extends BaseCommand {
+  static NAME = "INFO THREADS";
 }
 
-class INFO__DELAY extends BaseCommand {
-  static NAME = "INFO__DELAY";
+class INFO_DELAY extends BaseCommand {
+  static NAME = "INFO DELAY";
   
   constructor(options = {}) {
     super(setValues(options, {
@@ -111,12 +111,12 @@ class DIAG extends BaseCommand {
   static NAME = "DIAG";
 }
 
-class GL__INFO extends BaseCommand {
-  static NAME = "GL__INFO";
+class GL_INFO extends BaseCommand {
+  static NAME = "GL INFO";
 }
 
-class GL__GC extends BaseCommand {
-  static NAME = "GL__GC";
+class GL_GC extends BaseCommand {
+  static NAME = "GL GC";
 }
 
 class BYE extends BaseCommand {
@@ -152,17 +152,17 @@ module.exports = {
   TLS,
   VERSION,
   INFO,
-  INFO__TEMPLATE,
-  INFO__CONFIG,
-  INFO__PATHS,
-  INFO__SYSTEM,
-  INFO__SERVER,
-  INFO__QUEUES,
-  INFO__THREADS,
-  INFO__DELAY,
+  INFO_TEMPLATE,
+  INFO_CONFIG,
+  INFO_PATHS,
+  INFO_SYSTEM,
+  INFO_SERVER,
+  INFO_QUEUES,
+  INFO_THREADS,
+  INFO_DELAY,
   DIAG,
-  GL__INFO,
-  GL__GC,
+  GL_INFO,
+  GL_GC,
   BYE,
   KILL,
   RESTART,
