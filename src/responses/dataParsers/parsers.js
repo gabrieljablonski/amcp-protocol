@@ -14,6 +14,15 @@ class Parsers {
   static find(command) {
     return Parsers._registered.find(p => p.isCommandParser(command));
   }
+
+  static parse(command, data) {
+    try {
+      return this.find(command).parse(data);
+    } catch (err) {
+      console.warn("failed to parse data", err);
+      return data;
+    }
+  }
 }
 
 const { MediaFile } = require("./fileInfo");

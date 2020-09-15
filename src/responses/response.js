@@ -11,20 +11,7 @@ class Response {
     this._command = response.command;
     this._status = response.status;
     this._rawData = response.data;
-    this._parsedData = response.data;
-    
-    if (response.data) {
-      let parser = Parsers.find(response.command);
-      if (parser) {
-        try {
-          let parsed = parser.parse(response.data)
-          if (parsed)
-            this._parsedData = parsed;
-        } catch (err) {
-          console.warn("failed to parse response data", err);
-        }
-      }
-    }
+    this._parsedData = Parsers.parse(response.command, response.data);
   }
 
   get code() {
