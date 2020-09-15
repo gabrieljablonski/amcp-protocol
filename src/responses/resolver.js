@@ -1,9 +1,11 @@
 const Response = require("./response");
 
 class Resolver {
+  static DEFAULT_RESPONSE_TIMEOUT = 3000;
+
   constructor() {
-    this._resolve = null;
     this._queued = [];
+    this._responseTimeout = 0;
   }
 
   get expecting() {
@@ -11,21 +13,23 @@ class Resolver {
   }
 
   async(data) {
-    this._queued.push(data);
     return new Promise((resolve, reject) => {
-      this._resolve = resolve;
+      this._queued.push({ data, resolve });
+      this._responseTimeout = setTimeout(() => {
+        reject("command timed out");
+      }, Resolver.DEFAULT_RESPONSE_TIMEOUT);
     });
   }
 
   get resolve() {
     return data => {
-      this._resolve(Response.parse(data));
-      this._queued.shift();
+      if (this._responseTimeout) {
+        clearTimeout(this._responseTimeout);
+        this._responseTimeout = 0;
+      }
+      let resolve = this._queued.shift().resolve;
+      resolve(Response.parse(data));
     };
-  }
-
-  set resolve(resolver) {
-    this._resolve = resolver;
   }
 }
 

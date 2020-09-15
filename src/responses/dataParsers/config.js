@@ -21,6 +21,9 @@ class Config extends Parser {
     const config = parsed.configuration;
 
     config.channels = config.channels.channel;
+    if (!Array.isArray(config.channels)) 
+      config.channels = [config.channels];
+
     config.controllers = Object.entries(config.controllers).map(([prop, val]) => {
       return {
         netProtocol: prop,

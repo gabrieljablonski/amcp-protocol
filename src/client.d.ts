@@ -345,7 +345,7 @@ export class AMCPClient {
   lock(options: OptionsLock): Promise<Response>;
   dataStore(options: OptionsDataStore): Promise<Response>;
   dataRetrieve(options: OptionsDataRetrieve): Promise<Response>;
-  dataList(options: OptionsDataList): Promise<Response>;
+  dataList(options?: OptionsDataList): Promise<Response>;
   dataRemove(options: OptionsDataRemove): Promise<Response>;
   mixerKeyer(options: OptionsMixerKeyer): Promise<Response>;
   mixerChroma(options: OptionsMixerChroma): Promise<Response>;
@@ -371,11 +371,11 @@ export class AMCPClient {
   mixerClear(options: OptionsMixerClear): Promise<Response>;
   mixerChannelGrid(): Promise<Response>;
   cinf(options: OptionsCINF): Promise<Response>;
-  cls(options: OptionsCLS): Promise<Response>;
+  cls(options?: OptionsCLS): Promise<Response>;
   fls(): Promise<Response>;
-  tls(options: OptionsTLS): Promise<Response>;
-  version(options: OptionsVersion): Promise<Response>;
-  info(options: OptionsInfo): Promise<Response>;
+  tls(options?: OptionsTLS): Promise<Response>;
+  version(options?: OptionsVersion): Promise<Response>;
+  info(options?: OptionsInfo): Promise<Response>;
   infoTemplate(options: OptionsInfoTemplate): Promise<Response>;
   infoConfig(): Promise<Response>;
   infoPaths(): Promise<Response>;
@@ -390,7 +390,7 @@ export class AMCPClient {
   bye(): Promise<Response>;
   kill(): Promise<Response>;
   restart(): Promise<Response>;
-  help(options: OptionsHelp): Promise<Response>;
+  help(options?: OptionsHelp): Promise<Response>;
   templateAdd(options: OptionsTemplateAdd): Promise<Response>;
   templatePlay(options: OptionsTemplatePlay): Promise<Response>;
   templateStop(options: OptionsTemplateStop): Promise<Response>;
@@ -400,7 +400,7 @@ export class AMCPClient {
   templateUpdate(options: OptionsTemplateUpdate): Promise<Response>;
   templateInvoke(options: OptionsTemplateInvoke): Promise<Response>;
   templateInfo(options: OptionsTemplateInfo): Promise<Response>;
-  thumbnailList(options: OptionsThumbnailList): Promise<Response>;
+  thumbnailList(options?: OptionsThumbnailList): Promise<Response>;
   thumbnailRetrieve(options: OptionsThumbnailRetrieve): Promise<Response>;
   thumbnailGenerate(options: OptionsThumbnailGenerate): Promise<Response>;
   thumbnailGenerateAll(): Promise<Response>;

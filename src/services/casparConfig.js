@@ -67,11 +67,11 @@ class Channel {
 }
 
 class Controller {
-  static NET_PROTOCOLS = ["TCP", "UDP"];
+  static NET_PROTOCOLS = ["tcp", "udp"];
   static PROTOCOLS = ["AMCP"];
 
   constructor(controller) {
-    this.netProtocol = controller.netProtocol || "TCP";
+    this.netProtocol = controller.netProtocol || "tcp";
     this.protocol = controller.protocol || "AMCP";
     this.port = controller.port || 5250;
   }
@@ -107,11 +107,11 @@ class Config {
   static LOG_LEVELS = ["trace", "debug", "info", "warning", "error", "fatal"];
 
   constructor(configuration = {}) {
-    this.paths = configuration.paths || new Paths();
+    this.paths = new Paths(configuration.paths) || new Paths();
     this.lockClearPhrase = configuration.lockClearPhrase || "secret";
-    this.channels = configuration.channels || [];
-    this.controllers = configuration.controllers || [];
-    this.amcp = configuration.amcp || new AMCP();
+    this.channels = configuration.channels.map(c => new Channel(c)) || [];
+    this.controllers = configuration.controllers.map(c => new Controller(c)) || [];
+    this.amcp = new AMCP(configuration.amcp) || new AMCP();
     this.logLevel = configuration.logLevel || "info";
   }
 
@@ -126,6 +126,12 @@ class Config {
   }
 
   get xml() {
+    const obj = rename(this, key => {
+      if (key.startsWith("_"))
+        key = key.substring(1);
+      return camelToKebab(key);
+    });
+
     let controllers = {};
     this.controllers.forEach(c => {
       if (!controllers[c.netProtocol])
@@ -135,13 +141,12 @@ class Config {
         protocol: c.protocol,
       });
     });
-    this.controllers = controllers;
 
-    const obj = rename(this, key => {
-      if (key.startsWith("_"))
-        key = key.substring(1);
-      return camelToKebab(key);
-    });
+    obj.controllers = controllers;
+    obj.channels = {
+      channel: obj.channels,
+    };
+
     const xml = new jsonToXML({ indentBy: "    ", format: true })
       .parse({ configuration: obj });
     return `<?xml version="1.0" encoding="utf-8"?>\n${xml}`;
