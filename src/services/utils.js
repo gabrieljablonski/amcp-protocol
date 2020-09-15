@@ -1,5 +1,6 @@
 const sanitize = str => 
   str.trim()
+     .replace(/\\/g, "\\\\")
      .replace(/"/g, '\\"')
      .replace(/\n/g, "\\n");
 
@@ -18,7 +19,7 @@ const swapWordPositions = (str, first, second) => {
 };
 
 const camelToKebab = str => 
-  str.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+  str.replace(/([a-z0-9](?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
 
 const kebabToCamel = str => str.replace(/-./g, s=>s.toUpperCase()[1])
 

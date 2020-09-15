@@ -5,21 +5,21 @@ const { INFO } = require("../../commands/query");
 
 class ChannelStatus {
   constructor(channel) {
-    this._number = channel.number;
-    this._format = channel.format;
-    this._status = channel.status;
+    this.number = channel.number;
+    this.format = channel.format;
+    this.status = channel.status;
   }
+}
 
-  get number() {
-    return this._number;
-  }
+class Stage {
+  constructor(stage) {
+    this.layers = {};
 
-  get format() {
-    return this._format;
-  }
-
-  get status() {
-    return this._status;
+    let layers = stage.layer || {};
+    Object.entries(layers).forEach(([n, layer]) => {
+      n = parseInt(n.split("_")[1]);
+      this.layers[n] = layer;
+    });
   }
 }
 
@@ -31,21 +31,9 @@ class Channel extends Parser {
   constructor(channel) {
     super();
 
-    this._framerate = channel.framerate;
-    this._mixer = channel.mixer;
-    this._stage = channel.stage;
-  }
-
-  get framerate() {
-    return this._framerate;
-  }
-
-  get mixer() {
-    return this._mixer;
-  }
-
-  get stage() {
-    return this._stage;
+    this.framerate = channel.framerate;
+    this.mixer = channel.mixer;
+    this.stage = new Stage(channel.stage || {});
   }
 
   static parse(data) {

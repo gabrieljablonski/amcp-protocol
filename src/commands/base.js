@@ -32,19 +32,14 @@ class Command {
     let out = command;
 
     Object.entries(this).forEach(([prop, val]) => {
+      if (val == Command.OPTIONAL)
+        return;
+
       if (typeof val === "object")
         val = JSON.stringify(val);
 
       if (typeof val === "number") 
         val = val.toString();
-
-      if (val == Command.OPTIONAL)
-        return;
-
-      if (Command.HYPHENATED_PROPS.includes(prop)) {
-        out += val;
-        return;
-      }
 
       if (typeof val == "boolean") {
         if (Command.NON_BINARY_BOOL_ATTRS.includes(prop))
@@ -52,6 +47,12 @@ class Command {
         else
           val = val ? "1" : "0";
       }
+
+      if (Command.HYPHENATED_PROPS.includes(prop)) {
+        out += val;
+        return;
+      }
+
       if (val.includes('"') || val.includes("\n") || val.includes(" "))
         val = `"${sanitize(val)}"`;
 

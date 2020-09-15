@@ -107,11 +107,11 @@ class Config {
   static LOG_LEVELS = ["trace", "debug", "info", "warning", "error", "fatal"];
 
   constructor(configuration = {}) {
-    this.paths = new Paths(configuration.paths) || new Paths();
+    this.paths = new Paths(configuration.paths || {});
     this.lockClearPhrase = configuration.lockClearPhrase || "secret";
-    this.channels = configuration.channels.map(c => new Channel(c)) || [];
-    this.controllers = configuration.controllers.map(c => new Controller(c)) || [];
-    this.amcp = new AMCP(configuration.amcp) || new AMCP();
+    this.channels = configuration.channels ? configuration.channels.map(c => new Channel(c)) : [];
+    this.controllers = configuration.controllers ? configuration.controllers.map(c => new Controller(c)) : [];
+    this.amcp = new AMCP(configuration.amcp || {});
     this.logLevel = configuration.logLevel || "info";
   }
 
