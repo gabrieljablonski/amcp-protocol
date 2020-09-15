@@ -1,4 +1,3 @@
-require("log-timestamp");
 const io = require("socket.io-client");
 
 const ResponseResolver = require("./responses/resolver");
@@ -17,6 +16,10 @@ class AMCPClient {
 
     this._connected = false;
     this._responseResolver = null;
+  }
+
+  enableLogTimestamp() {
+    require("log-timestamp");
   }
 
   connect() {
