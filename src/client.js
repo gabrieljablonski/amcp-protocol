@@ -1,7 +1,6 @@
 require("log-timestamp");
 const io = require("socket.io-client");
 
-const Response = require("./responses/response");
 const ResponseResolver = require("./responses/resolver");
 const CasparConfig = require("./services/casparConfig");
 const Commands = require("./commands");
@@ -18,10 +17,13 @@ class AMCPClient {
     this._connectionTimeout = options.connectionTimeout || AMCPClient.CONNECTION_TIMEOUT;
 
     this._connected = false;
-    this._responseResolver = new ResponseResolver();
+    this._responseResolver = null;
   }
 
   connect() {
+    if (this._connected)
+      throw new Error("socket is already connected");
+
     this._socket = io(`http://${this._host}:${this._port}`);
 
     return new Promise((resolve, reject) => {
