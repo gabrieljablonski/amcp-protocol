@@ -17,7 +17,8 @@ class Parsers {
 
   static parse(command, data) {
     try {
-      return this.find(command).parse(data);
+      let parser = this.find(command);
+      return parser ? parser.parse(data) : data;
     } catch (err) {
       console.warn("failed to parse data", err);
       return data;
