@@ -323,13 +323,13 @@ type ChannelInfo = {
   stage: object;
 };
 
-type MediaInfo = {
+type MediaFile = {
   name: string;
   type: "STILL" | "MOVIE" | "AUDIO";
   size: number;
   lastModified: Date;
   frameCount: number;
-  frameRate: string;
+  frameRate: object;
 };
 
 type Response = {
@@ -352,11 +352,11 @@ type ResponseInfoConfig = Response & {
 };
 
 type ResponseCINF = Response & {
-  parsedData: MediaInfo;
+  parsedData: MediaFile;
 };
 
 type ResponseCLS = Response & {
-  parsedData: [MediaInfo];
+  parsedData: [MediaFile];
 };
 
 export class AMCPClient {

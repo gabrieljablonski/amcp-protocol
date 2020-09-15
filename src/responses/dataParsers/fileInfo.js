@@ -45,17 +45,18 @@ class MediaFile extends Parser {
     const files = data.split("\n");
 
     return files.map(file => {
-      file = file.replace(/  /g, " ");
-      const split = file.split(" ");
-      const dateMatch = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/.exec(split[3]);
+      const match = /"([ \S]+)" +(\w+) +(\d+) +(\d+) +(\d+) +(\d+)\/(\d+)/.exec(file);
+
+      const dateMatch = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/.exec(match[4]);
       const lastModified = new Date(dateMatch[1], dateMatch[2], dateMatch[3], dateMatch[4], dateMatch[5], dateMatch[6]);
+
       return new MediaFile({
-        name: split[0].substring(1, split[0].length - 1),
-        type: split[1],
-        size: parseInt(split[2]),
+        name: match[1],
+        type: match[2],
+        size: parseInt(match[3]),
         lastModified,
-        frameCount: parseInt(split[4]),
-        frameRate: split[5],
+        frameCount: parseInt(match[5]),
+        frameRate: [match[7], match[6]],
       });
     });
   }
