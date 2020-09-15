@@ -54,6 +54,10 @@ class Command {
       }
       if (val.includes('"') || val.includes("\n") || val.includes(" "))
         val = `"${sanitize(val)}"`;
+
+      if (val.startsWith("http"))
+        val = `[HTML] "${val}"`
+
       out += ` ${val}`;
     });
 

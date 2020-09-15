@@ -6,10 +6,8 @@ class Parser {
     return this.COMMANDS.map(c => {
       if (this.COMMAND_PREFIX)
         return `${this.COMMAND_PREFIX} ${c.NAME}`;
-        
       return c.NAME;
-    }
-    ).includes(command);
+    }).includes(command);
   }
 }
 

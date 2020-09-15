@@ -2,7 +2,6 @@ require("log-timestamp");
 const io = require("socket.io-client");
 
 const ResponseResolver = require("./responses/resolver");
-const CasparConfig = require("./services/casparConfig");
 const Commands = require("./commands");
 
 class AMCPClient {
@@ -385,6 +384,5 @@ class AMCPClient {
 }
 
 module.exports = { 
-  CasparConfig,
   AMCPClient,
 };

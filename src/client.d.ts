@@ -305,20 +305,59 @@ type Paths = {
   templatePath: string;
 };
 
-export class CasparConfig {
-  public paths: Paths;
-  public lockClearPhrase: string;
-  public channels: [Channel];
-  public xml: string;
+type Channel = {
+  videoMode: "PAL" | "NTSC" | "576p2500" | "720p2398" | "720p2400" | "720p2500" | "720p5000" | "720p2997" | "720p5994" | "720p3000" | "720p6000" | "1080p2398" | "1080p2400" | "1080i5000" | "1080i5994" | "1080i6000" | "1080p2500" | "1080p2997" | "1080p3000" | "1080p5000" | "1080p5994" | "1080p6000" | "1556p2398" | "1556p2400" | "1556p2500" | "dci1080p2398" | "dci1080p2400" | "dci1080p2500" | "2160p2398" | "2160p2400" | "2160p2500" | "2160p2997" | "2160p3000" | "2160p5000" | "2160p5994" | "2160p6000" | "dci2160p2398" | "dci2160p2400" | "dci2160p2500";
+  consumers: [Consumer];
 };
 
-export class Response {
+type CasparConfig = {
+  paths: Paths;
+  lockClearPhrase: string;
+  channels: [Channel];
+  xml: string;
+};
+
+type ChannelInfo = {
+  framerate: object;
+  mixer: object;
+  stage: object;
+};
+
+type MediaInfo = {
+  name: string;
+  type: "STILL" | "MOVIE" | "AUDIO";
+  size: number;
+  lastModified: Date;
+  frameCount: number;
+  frameRate: string;
+};
+
+type Response = {
   code: number;
   command: string;
   status: "OK" | "ERROR" | "FAILED";
   rawData: string;
-  parsedData: CasparConfig | any;
-}
+};
+
+type ResponseDataRetrieve = Response & {
+  parsedData: object;
+};
+
+type ResponseInfo = Response & {
+  parsedData: ChannelInfo;
+};
+
+type ResponseInfoConfig = Response & {
+  parsedData: CasparConfig;
+};
+
+type ResponseCINF = Response & {
+  parsedData: MediaInfo;
+};
+
+type ResponseCLS = Response & {
+  parsedData: [MediaInfo];
+};
 
 export class AMCPClient {
   constructor(options: AMCPClientOptions);
@@ -328,63 +367,63 @@ export class AMCPClient {
   sendCommand(command: Command): Promise<Response>;
   saveConfig(config: CasparConfig): Promise<Response>;
 
-  loadBG(options: OptionsLoadPlay): Promise<Response>;
-  load(options: OptionsLoadPlay): Promise<Response>;
-  play(options: OptionsLoadPlay): Promise<Response>;
-  pause(options: OptionsWithChannelLayer): Promise<Response>;
-  resume(options: OptionsWithChannelLayer): Promise<Response>;
-  stop(options: OptionsWithChannelLayer): Promise<Response>;
-  clear(options: OptionsWithChannelLayer): Promise<Response>;
-  call(options: OptionsCall): Promise<Response>;
-  swap(options: OptionsSwap): Promise<Response>;
-  add(options: OptionsAdd): Promise<Response>;
-  remove(options: OptionsRemove): Promise<Response>;
-  print(options: OptionsWithChannelLayer): Promise<Response>;
-  logLevel(options: OptionsLogLevel): Promise<Response>;
-  logCategory(options: OptionsLogCategory): Promise<Response>;
-  set(options: OptionsSet): Promise<Response>;
-  lock(options: OptionsLock): Promise<Response>;
-  dataStore(options: OptionsDataStore): Promise<Response>;
-  dataRetrieve(options: OptionsDataRetrieve): Promise<Response>;
+  loadBG(options?: OptionsLoadPlay): Promise<Response>;
+  load(options?: OptionsLoadPlay): Promise<Response>;
+  play(options?: OptionsLoadPlay): Promise<Response>;
+  pause(options?: OptionsWithChannelLayer): Promise<Response>;
+  resume(options?: OptionsWithChannelLayer): Promise<Response>;
+  stop(options?: OptionsWithChannelLayer): Promise<Response>;
+  clear(options?: OptionsWithChannelLayer): Promise<Response>;
+  call(options?: OptionsCall): Promise<Response>;
+  swap(options?: OptionsSwap): Promise<Response>;
+  add(options?: OptionsAdd): Promise<Response>;
+  remove(options?: OptionsRemove): Promise<Response>;
+  print(options?: OptionsWithChannelLayer): Promise<Response>;
+  logLevel(options?: OptionsLogLevel): Promise<Response>;
+  logCategory(options?: OptionsLogCategory): Promise<Response>;
+  set(options?: OptionsSet): Promise<Response>;
+  lock(options?: OptionsLock): Promise<Response>;
+  dataStore(options?: OptionsDataStore): Promise<Response>;
+  dataRetrieve(options?: OptionsDataRetrieve): Promise<ResponseDataRetrieve>;
   dataList(options?: OptionsDataList): Promise<Response>;
-  dataRemove(options: OptionsDataRemove): Promise<Response>;
-  mixerKeyer(options: OptionsMixerKeyer): Promise<Response>;
-  mixerChroma(options: OptionsMixerChroma): Promise<Response>;
-  mixerBlend(options: OptionsMixerBlend): Promise<Response>;
-  mixerInvert(options: OptionsMixerInvert): Promise<Response>;
-  mixerOpacity(options: OptionsMixerOpacity): Promise<Response>;
-  mixerBrightness(options: OptionsMixerBrightness): Promise<Response>;
-  mixerSaturation(options: OptionsMixerSaturation): Promise<Response>;
-  mixerContrast(options: OptionsMixerContrast): Promise<Response>;
-  mixerLevels(options: OptionsMixerLevels): Promise<Response>;
-  mixerFill(options: OptionsMixerFill): Promise<Response>;
-  mixerClip(options: OptionsMixerClip): Promise<Response>;
-  mixerAnchor(options: OptionsMixerAnchor): Promise<Response>;
-  mixerCrop(options: OptionsMixerCrop): Promise<Response>;
-  mixerRotation(options: OptionsMixerRotation): Promise<Response>;
-  mixerPerspective(options: OptionsMixerPerspective): Promise<Response>;
-  mixerMipmap(options: OptionsMixerMipmap): Promise<Response>;
-  mixerVolume(options: OptionsMixerVolume): Promise<Response>;
-  mixerMasterVolume(options: OptionsMixerMasterVolume): Promise<Response>;
-  mixerStraightAlphaOutput(options: OptionsMixerStraightAlphaOutput): Promise<Response>;
-  mixerGrid(options: OptionsMixerGrid): Promise<Response>;
-  mixerCommit(options: OptionsMixerCommit): Promise<Response>;
-  mixerClear(options: OptionsMixerClear): Promise<Response>;
+  dataRemove(options?: OptionsDataRemove): Promise<Response>;
+  mixerKeyer(options?: OptionsMixerKeyer): Promise<Response>;
+  mixerChroma(options?: OptionsMixerChroma): Promise<Response>;
+  mixerBlend(options?: OptionsMixerBlend): Promise<Response>;
+  mixerInvert(options?: OptionsMixerInvert): Promise<Response>;
+  mixerOpacity(options?: OptionsMixerOpacity): Promise<Response>;
+  mixerBrightness(options?: OptionsMixerBrightness): Promise<Response>;
+  mixerSaturation(options?: OptionsMixerSaturation): Promise<Response>;
+  mixerContrast(options?: OptionsMixerContrast): Promise<Response>;
+  mixerLevels(options?: OptionsMixerLevels): Promise<Response>;
+  mixerFill(options?: OptionsMixerFill): Promise<Response>;
+  mixerClip(options?: OptionsMixerClip): Promise<Response>;
+  mixerAnchor(options?: OptionsMixerAnchor): Promise<Response>;
+  mixerCrop(options?: OptionsMixerCrop): Promise<Response>;
+  mixerRotation(options?: OptionsMixerRotation): Promise<Response>;
+  mixerPerspective(options?: OptionsMixerPerspective): Promise<Response>;
+  mixerMipmap(options?: OptionsMixerMipmap): Promise<Response>;
+  mixerVolume(options?: OptionsMixerVolume): Promise<Response>;
+  mixerMasterVolume(options?: OptionsMixerMasterVolume): Promise<Response>;
+  mixerStraightAlphaOutput(options?: OptionsMixerStraightAlphaOutput): Promise<Response>;
+  mixerGrid(options?: OptionsMixerGrid): Promise<Response>;
+  mixerCommit(options?: OptionsMixerCommit): Promise<Response>;
+  mixerClear(options?: OptionsMixerClear): Promise<Response>;
   mixerChannelGrid(): Promise<Response>;
-  cinf(options: OptionsCINF): Promise<Response>;
-  cls(options?: OptionsCLS): Promise<Response>;
+  cinf(options?: OptionsCINF): Promise<ResponseCINF>;
+  cls(options?: OptionsCLS): Promise<ResponseCLS>;
   fls(): Promise<Response>;
   tls(options?: OptionsTLS): Promise<Response>;
   version(options?: OptionsVersion): Promise<Response>;
-  info(options?: OptionsInfo): Promise<Response>;
-  infoTemplate(options: OptionsInfoTemplate): Promise<Response>;
-  infoConfig(): Promise<Response>;
+  info(options?: OptionsInfo): Promise<ResponseInfo>;
+  infoTemplate(options?: OptionsInfoTemplate): Promise<Response>;
+  infoConfig(): Promise<ResponseInfoConfig>;
   infoPaths(): Promise<Response>;
   infoSystem(): Promise<Response>;
   infoServer(): Promise<Response>;
   infoQueues(): Promise<Response>;
   infoThreads(): Promise<Response>;
-  infoDelay(options: OptionsInfoDelay): Promise<Response>;
+  infoDelay(options?: OptionsInfoDelay): Promise<Response>;
   diag(): Promise<Response>;
   glInfo(): Promise<Response>;
   glGC(): Promise<Response>;
@@ -392,17 +431,17 @@ export class AMCPClient {
   kill(): Promise<Response>;
   restart(): Promise<Response>;
   help(options?: OptionsHelp): Promise<Response>;
-  templateAdd(options: OptionsTemplateAdd): Promise<Response>;
-  templatePlay(options: OptionsTemplatePlay): Promise<Response>;
-  templateStop(options: OptionsTemplateStop): Promise<Response>;
-  templateNext(options: OptionsTemplateNext): Promise<Response>;
-  templateRemove(options: OptionsTemplateRemove): Promise<Response>;
-  templateClear(options: OptionsTemplateClear): Promise<Response>;
-  templateUpdate(options: OptionsTemplateUpdate): Promise<Response>;
-  templateInvoke(options: OptionsTemplateInvoke): Promise<Response>;
-  templateInfo(options: OptionsTemplateInfo): Promise<Response>;
+  templateAdd(options?: OptionsTemplateAdd): Promise<Response>;
+  templatePlay(options?: OptionsTemplatePlay): Promise<Response>;
+  templateStop(options?: OptionsTemplateStop): Promise<Response>;
+  templateNext(options?: OptionsTemplateNext): Promise<Response>;
+  templateRemove(options?: OptionsTemplateRemove): Promise<Response>;
+  templateClear(options?: OptionsTemplateClear): Promise<Response>;
+  templateUpdate(options?: OptionsTemplateUpdate): Promise<Response>;
+  templateInvoke(options?: OptionsTemplateInvoke): Promise<Response>;
+  templateInfo(options?: OptionsTemplateInfo): Promise<Response>;
   thumbnailList(options?: OptionsThumbnailList): Promise<Response>;
-  thumbnailRetrieve(options: OptionsThumbnailRetrieve): Promise<Response>;
-  thumbnailGenerate(options: OptionsThumbnailGenerate): Promise<Response>;
+  thumbnailRetrieve(options?: OptionsThumbnailRetrieve): Promise<Response>;
+  thumbnailGenerate(options?: OptionsThumbnailGenerate): Promise<Response>;
   thumbnailGenerateAll(): Promise<Response>;
-}
+};

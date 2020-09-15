@@ -15,7 +15,15 @@ class Response {
     
     if (response.data) {
       let parser = Parsers.find(response.command);
-      this._parsedData = parser ? parser.parse(response.data) : response.data;
+      if (parser) {
+        try {
+          let parsed = parser.parse(response.data)
+          if (parsed)
+            this._parsedData = parsed;
+        } catch (err) {
+          console.warn("failed to parse response data", err);
+        }
+      }
     }
   }
 

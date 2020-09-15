@@ -7,19 +7,7 @@ class Data extends Parser {
   static COMMANDS = [
     RETRIEVE,
   ];
-
-  get framerate() {
-    return this._framerate;
-  }
-
-  get mixer() {
-    return this._mixer;
-  }
-
-  get stage() {
-    return this._stage;
-  }
-
+  
   static parse(data) {
     if (!data) 
       return data;
