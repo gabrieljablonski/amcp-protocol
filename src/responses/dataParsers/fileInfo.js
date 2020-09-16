@@ -56,7 +56,7 @@ class MediaFile extends Parser {
         size: parseInt(match[3]),
         lastModified,
         frameCount: parseInt(match[5]),
-        frameRate: [match[7], match[6]],
+        frameRate: [match[7], match[6]].map(n => parseInt(n)),
       });
     });
   }

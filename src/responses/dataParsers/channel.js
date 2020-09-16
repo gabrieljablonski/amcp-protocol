@@ -31,7 +31,11 @@ class Channel extends Parser {
   constructor(channel) {
     super();
 
-    this.framerate = channel.framerate;
+    this.frameRate = channel.framerate;
+
+    if (Array.isArray(this.frameRate)) {
+      this.frameRate = this.frameRate.map(n => parseInt(n));
+    }
     this.mixer = channel.mixer;
     this.stage = new Stage(channel.stage || {});
   }
