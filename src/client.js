@@ -19,7 +19,7 @@ class AMCPClient {
     this._responseResolver = null;
   }
 
-  enableLogTimestamp() {
+  enableLogging() {
     Logger.enable();
   }
 

@@ -317,8 +317,10 @@ type CasparConfig = {
   xml: string;
 };
 
+type Fraction = [number];
+
 type ChannelInfo = {
-  framerate: object;
+  framerate: Fraction;
   mixer: object;
   stage: object;
 };
@@ -329,7 +331,7 @@ type MediaFile = {
   size: number;
   lastModified: Date;
   frameCount: number;
-  frameRate: object;
+  frameRate: Fraction;
 };
 
 type Response = {
