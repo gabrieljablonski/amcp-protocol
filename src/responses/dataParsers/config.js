@@ -14,7 +14,7 @@ class Config extends Parser {
     const parsed = xmlParser.parse(kebabToCamel(data));
 
     if (!parsed) {
-      console.warn("failed to parse config data");
+      Logger.warn("failed to parse config data");
       return data;
     }
 

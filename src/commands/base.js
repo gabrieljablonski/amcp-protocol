@@ -1,4 +1,5 @@
 const { sanitize } = require("../services/utils");
+const Logger = require("./services/logger");
 
 class Command {
   static NAME = "";
@@ -7,6 +8,7 @@ class Command {
   static HYPHENATED_PROPS = ["layer", "firstLayer", "secondLayer", "consumerIndex"]
     // these appear as the attr name in the output, instead of 0/1
   static NON_BINARY_BOOL_ATTRS = ["loop", "auto", "transforms"]
+  static NO_SPACE_BETWEEN_ARGS = ["parameters"];
 
   constructor(options = {}) {
     Object.entries(options).forEach(([prop, val]) => {
@@ -53,7 +55,7 @@ class Command {
         return;
       }
 
-      if (val.includes('"') || val.includes("\n") || val.includes(" "))
+      if (val.includes('"') || val.includes("\n") || (val.includes(" ") && !Command.NO_SPACE_BETWEEN_ARGS.includes(prop)))
         val = `"${sanitize(val)}"`;
 
       if (val.startsWith("http"))

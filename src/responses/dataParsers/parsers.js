@@ -1,3 +1,5 @@
+const Logger = require("./services/logger");
+
 class Parsers {
   static _registered = [];
 
@@ -20,7 +22,7 @@ class Parsers {
       let parser = this.find(command);
       return parser ? parser.parse(data) : data;
     } catch (err) {
-      console.warn("failed to parse data", err);
+      Logger.warn("failed to parse data", err);
       return data;
     }
   }

@@ -2,6 +2,7 @@ const io = require("socket.io-client");
 
 const ResponseResolver = require("./responses/resolver");
 const Commands = require("./commands");
+const Logger = require("./services/logger");
 
 class AMCPClient {
   // TODO: handle async events
@@ -38,18 +39,18 @@ class AMCPClient {
         this._connected = true;
         clearTimeout(connectionTimeout);
         resolve();
-        console.log(`Connection established to http://${this._host}:${this._port}.`)
+        Logger.log(`Connection established to http://${this._host}:${this._port}.`)
       });
 
       this._socket.on("disconnect", () => {
         this._connected = false;
-        console.log("Connection lost.");
+        Logger.log("Connection lost.");
       });
   
       this._socket.on("amcp_response", data => {
         if (this._responseResolver.expecting)
           return this._responseResolver.resolve(data);
-        console.log("received: " + data);
+        Logger.log("received: " + data);
       });
     });
   }
@@ -64,7 +65,7 @@ class AMCPClient {
     if (!this._connected)
       throw new Error("socket is not connected");
     const data = command.build() + "\r\n";
-    console.log(`Sending command: ${JSON.stringify(data)}`);
+    Logger.log(`Sending command: ${JSON.stringify(data)}`);
     this._socket.emit("amcp", data);
 
     return this._responseResolver.async(data);
