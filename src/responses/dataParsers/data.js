@@ -1,5 +1,6 @@
 const Parser = require("./base");
 const { RETRIEVE } = require("../../commands/data");
+const Logger = require("../../services/logger");
 
 class Data extends Parser {
   static COMMAND_PREFIX = "DATA";

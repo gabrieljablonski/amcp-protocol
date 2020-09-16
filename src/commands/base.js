@@ -1,5 +1,4 @@
 const { sanitize } = require("../services/utils");
-const Logger = require("./services/logger");
 
 class Command {
   static NAME = "";

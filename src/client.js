@@ -20,7 +20,7 @@ class AMCPClient {
   }
 
   enableLogTimestamp() {
-    require("log-timestamp");
+    Logger.enable();
   }
 
   connect() {

@@ -4,6 +4,7 @@ const Parser = require("./base");
 const { INFO_CONFIG } = require("../../commands/query");
 const CasparConfig = require("../../services/casparConfig");
 const { kebabToCamel } = require("../../services/utils");
+const Logger = require("../../services/logger");
 
 class Config extends Parser {
   static COMMANDS = [
